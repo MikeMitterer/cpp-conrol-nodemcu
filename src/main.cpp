@@ -27,7 +27,11 @@ States currentState = States::Idle;
 // LED-Status
 States ledState = States::LedOff;
 
+// Control Relays via GET-Request
 AsyncWebServer server(PORT);
+
+// Control via Alexa
+fauxmoESP fauxmo;
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
@@ -78,6 +82,24 @@ void setup() {
 
     server.on("/relay/3/off", [&](AsyncWebServerRequest *request) {
         currentState = States::Relay3Off; request->send(204); });
+
+    fauxmo.addDevice("licht eins");
+    fauxmo.addDevice("licht zwei");
+    fauxmo.addDevice("licht drei");
+    fauxmo.onMessage([](unsigned char device_id, const char* device_name, bool state) {
+        Serial.printf("[MAIN] Device #%d (%s) state: %s\n", device_id, device_name, state ? "ON" : "OFF");
+
+        String deviceName = String(device_name);
+        if(deviceName == "licht eins") {
+            currentState = state ? States::Relay1On : States::Relay1Off;
+
+        } else if(deviceName == "licht zwei") {
+            currentState = state ? States::Relay2On : States::Relay2Off;
+
+        } else if(deviceName == "licht drei") {
+            currentState = state ? States::Relay3On : States::Relay3Off;
+        }
+    });
 
     server.begin();
 }
@@ -154,7 +176,7 @@ void loop() {
             yield();
     }
 
-    //server.handleClient();
+    fauxmo.handle();
     yield();
 }
 
