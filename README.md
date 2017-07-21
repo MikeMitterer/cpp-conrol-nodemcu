@@ -1,5 +1,5 @@
 # NODE-MCU (ESP8266)
-> Controls 3 Relais with NodeMCU
+> Controls 3 Relays with NodeMCU
 
 ![Veroboard](https://github.com/MikeMitterer/cpp-conrol-nodemcu/blob/master/doc/images/veroboard.jpg?raw=true "Veroboard")
 
