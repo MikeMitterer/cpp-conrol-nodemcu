@@ -1,0 +1,19 @@
+//
+// cmake-Template für config.h
+//
+
+#ifndef CONTROLNANI_CONFIG_H_IN_H
+#define CONTROLNANI_CONFIG_H_IN_H
+
+#include <Arduino.h>
+
+// the configured options and settings for HelloWorld
+const String ControlNani_VERSION_MAJOR = "@ControlNani_VERSION_MAJOR@";
+const String ControlNani_VERSION_MINOR = "@ControlNani_VERSION_MINOR@";
+
+// Password compiled into source
+// Set in .config/passwords.cmake (or via ENV-VAR)
+const String ControlNani_PASSWORD_LS = "@ControlNani_PASSWORD_LS@";
+const String ControlNani_PASSWORD_TPL = "@ControlNani_PASSWORD_TPL@";
+
+#endif //CONTROLNANI_CONFIG_H_IN_H
