@@ -3,6 +3,12 @@
 
 ![Veroboard](https://github.com/MikeMitterer/cpp-conrol-nodemcu/blob/master/doc/images/veroboard.jpg?raw=true "Veroboard")
 
+## Alexa
+> [Adafruit](https://learn.adafruit.com/easy-alexa-or-echo-control-of-your-esp8266-huzzah/overview)  
+> [Fauxmo - GH Python](https://github.com/makermusings/fauxmo)
+> [Fauxmo - BitBucket ESP8266 Version](https://bitbucket.org/xoseperez/fauxmoesp)    
+> [Amazon Echo and Home Automation](http://www.makermusings.com/2015/07/13/amazon-echo-and-home-automation/)  
+> [ESP8266 NodeMcu mit Amazon Echo (Alexa) steuern](http://blog.christians-shop.de/esp8266-mit-amazon-echo-alexa-steuern/)  
 
 ### License 
 

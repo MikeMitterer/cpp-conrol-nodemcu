@@ -6,8 +6,7 @@
 #define ESP8266_TEST1_WIFI_H_H
 
 #include <Arduino.h>
-#include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
+#include <fauxmoESP.h>
 #include "config.h"
 
 // -- Passwords are invalid (2017-03-03)

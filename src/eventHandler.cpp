@@ -3,20 +3,18 @@
 //
 
 #include "eventHandler.h"
-#include <Arduino.h>
-#include <ESP8266WebServer.h>
 
-void handleNotFound() {
+void handleNotFound(AsyncWebServerRequest *request) {
     String message = "File Not Found\n\n";
     message += "URI: ";
-    message += server.uri();
+    message += request->url();
     message += "\nMethod: ";
-    message += (server.method() == HTTP_GET) ? "GET" : "POST";
+    message += (request->method() == HTTP_GET) ? "GET" : "POST";
     message += "\nArguments: ";
-    message += server.args();
+    message += request->args();
     message += "\n";
-    for (uint8_t i=0; i<server.args(); i++){
-        message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
+    for (uint8_t i = 0; i < request->args(); i++){
+        message += " " + request->argName(i) + ": " + request->arg(i) + "\n";
     }
-    server.send(404, "text/plain", message);
+    request->send(404, "text/plain", message);
 }

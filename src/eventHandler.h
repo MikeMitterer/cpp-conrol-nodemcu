@@ -5,11 +5,12 @@
 #ifndef CONTROLNANI_EVENTHANDLER_H
 #define CONTROLNANI_EVENTHANDLER_H
 
-#include <ESP8266WebServer.h>
+#include <Arduino.h>
+#include <fauxmoESP.h>
 
 // In Main definiert!
-extern ESP8266WebServer server;
+extern AsyncWebServer server;
 
-void handleNotFound();
+void handleNotFound(AsyncWebServerRequest *request);
 
 #endif //CONTROLNANI_EVENTHANDLER_H

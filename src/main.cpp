@@ -2,7 +2,7 @@
 #include "wifi.h"
 #include "eventHandler.h"
 #include <Arduino.h>
-#include <ESP8266WebServer.h>
+#include <fauxmoESP.h>
 
 const uint8_t PORT = 80;
 
@@ -27,7 +27,7 @@ States currentState = States::Idle;
 // LED-Status
 States ledState = States::LedOff;
 
-ESP8266WebServer server(PORT);
+AsyncWebServer server(PORT);
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
@@ -61,23 +61,23 @@ void setup() {
     // Setup Server
     server.onNotFound(handleNotFound);
 
-    server.on("/relay/1/on", [&]() {
-        currentState = States::Relay1On; server.send(204); });
+    server.on("/relay/1/on", HTTP_GET, [&](AsyncWebServerRequest *request) {
+        currentState = States::Relay1On; request->send(204); });
 
-    server.on("/relay/1/off", [&]() {
-        currentState = States::Relay1Off; server.send(204); });
+    server.on("/relay/1/off", [&](AsyncWebServerRequest *request) {
+        currentState = States::Relay1Off; request->send(204); });
 
-    server.on("/relay/2/on", [&]() {
-        currentState = States::Relay2On; server.send(204); });
+    server.on("/relay/2/on", [&](AsyncWebServerRequest *request) {
+        currentState = States::Relay2On; request->send(204); });
 
-    server.on("/relay/2/off", [&]() {
-        currentState = States::Relay2Off; server.send(204); });
+    server.on("/relay/2/off", [&](AsyncWebServerRequest *request) {
+        currentState = States::Relay2Off; request->send(204); });
 
-    server.on("/relay/3/on", [&]() {
-        currentState = States::Relay3On; server.send(204); });
+    server.on("/relay/3/on", [&](AsyncWebServerRequest *request) {
+        currentState = States::Relay3On; request->send(204); });
 
-    server.on("/relay/3/off", [&]() {
-        currentState = States::Relay3Off; server.send(204); });
+    server.on("/relay/3/off", [&](AsyncWebServerRequest *request) {
+        currentState = States::Relay3Off; request->send(204); });
 
     server.begin();
 }
@@ -154,7 +154,7 @@ void loop() {
             yield();
     }
 
-    server.handleClient();
+    //server.handleClient();
     yield();
 }
 

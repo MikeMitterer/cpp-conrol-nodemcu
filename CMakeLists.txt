@@ -25,15 +25,15 @@ configure_file (
 #)
 
 add_custom_target(
-    PLATFORMIO_UPLOAD ALL
-    COMMAND ${PLATFORMIO_CMD} -f -c clion run --target upload
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        PLATFORMIO_UPLOAD ALL
+        COMMAND ${PLATFORMIO_CMD} -f -c clion run --target upload
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 add_custom_target(
-    PLATFORMIO_CLEAN ALL
-    COMMAND ${PLATFORMIO_CMD} -f -c clion run --target clean
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        PLATFORMIO_CLEAN ALL
+        COMMAND ${PLATFORMIO_CMD} -f -c clion run --target clean
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 #add_custom_target(
@@ -55,9 +55,9 @@ add_custom_target(
 #)
 
 add_custom_target(
-    PLATFORMIO_UPDATE_ALL ALL
-    COMMAND ${PLATFORMIO_CMD} -f -c clion update
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        PLATFORMIO_UPDATE_ALL ALL
+        COMMAND ${PLATFORMIO_CMD} -f -c clion update
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 #add_custom_target(
@@ -81,3 +81,4 @@ set(SOURCE_FILES
 add_executable(${PROJECT_NAME}
         ${HEADER_FILES} ${SOURCE_FILES}
         )
+
