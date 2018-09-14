@@ -7,6 +7,7 @@
 
 #include <Arduino.h>
 #include <fauxmoESP.h>
+#include <ESPAsyncWebServer.h>
 
 // In Main definiert!
 extern AsyncWebServer server;

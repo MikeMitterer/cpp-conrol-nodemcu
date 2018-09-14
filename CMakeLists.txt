@@ -74,8 +74,12 @@ file(GLOB_RECURSE HEADER_FILES src/*.h)
 
 set(SOURCE_FILES
         src/config.h
+        src/wifi.h
+
         src/main.cpp
         src/eventHandler.cpp
+        src/callbacks.cpp
+        src/wifi.cpp
         )
 
 add_executable(${PROJECT_NAME}

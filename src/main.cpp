@@ -1,10 +1,25 @@
+#include <Arduino.h>
+#ifdef ESP32
+    #include <WiFi.h>
+#else
+    #include <ESP8266WiFi.h>
+#endif
+
+#include <fauxmoESP.h>
+#include <ESPAsyncWebServer.h>
+
 #include "pins.h"
 #include "wifi.h"
 #include "eventHandler.h"
-#include <Arduino.h>
-#include <fauxmoESP.h>
+#include "callbacks.h"
+
+
+#include "config.h"
 
 const uint8_t PORT = 80;
+
+const String ssid { ControlNani_SSID }; // NOLINT(cert-err58-cpp)
+const String password { ControlNani_PASSWORD }; // NOLINT(cert-err58-cpp)
 
 int buttonState = LOW;
 bool isButtonPressed = false;
@@ -38,7 +53,6 @@ fauxmoESP fauxmo;
 void setup() {
     // Power - ON über den Mosfet!
 
-
     // Setup Pins
     pinMode(pinButton, INPUT);
     pinMode(pinButtonIndicatorLED, OUTPUT);
@@ -60,7 +74,7 @@ void setup() {
     delay(10);
 
     // Setup WIFI
-    setupWIFI(ssid, password, wifiIndicatorLED);
+    setupWIFI(ssid.c_str(),password.c_str(),wifiIndicatorLED);
 
     // Setup Server
     server.onNotFound(handleNotFound);
@@ -83,23 +97,12 @@ void setup() {
     server.on("/relay/3/off", [&](AsyncWebServerRequest *request) {
         currentState = States::Relay3Off; request->send(204); });
 
-    fauxmo.addDevice("licht eins");
-    fauxmo.addDevice("licht zwei");
-    fauxmo.addDevice("licht drei");
-    fauxmo.onMessage([](unsigned char device_id, const char* device_name, bool state) {
-        Serial.printf("[MAIN] Device #%d (%s) state: %s\n", device_id, device_name, state ? "ON" : "OFF");
+    fauxmo.addDevice("licht eins"); // ID 0
+    fauxmo.addDevice("licht zwei"); // ID 1
+    fauxmo.addDevice("licht drei"); // ID 2
+    fauxmo.enable(true);
 
-        String deviceName = String(device_name);
-        if(deviceName == "licht eins") {
-            currentState = state ? States::Relay1On : States::Relay1Off;
-
-        } else if(deviceName == "licht zwei") {
-            currentState = state ? States::Relay2On : States::Relay2Off;
-
-        } else if(deviceName == "licht drei") {
-            currentState = state ? States::Relay3On : States::Relay3Off;
-        }
-    });
+    fauxmo.onSetState(callbackSetState);
 
     server.begin();
 }

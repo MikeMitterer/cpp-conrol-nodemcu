@@ -13,7 +13,8 @@ const String ControlNani_VERSION_MINOR = "@ControlNani_VERSION_MINOR@";
 
 // Password compiled into source
 // Set in .config/passwords.cmake (or via ENV-VAR)
-const String ControlNani_PASSWORD_LS = "@ControlNani_PASSWORD_LS@";
-const String ControlNani_PASSWORD_TPL = "@ControlNani_PASSWORD_TPL@";
+const char* ControlNani_SSID = "@ControlNani_SSID@";
+const char* ControlNani_PASSWORD = "@ControlNani_PASSWORD@";
+
 
 #endif //CONTROLNANI_CONFIG_H_IN_H
